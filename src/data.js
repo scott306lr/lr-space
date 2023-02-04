@@ -58,7 +58,8 @@ export const headerData = {
     },
   ],
   actions: [
-    { type: 'button', text: 'Download', href: 'https://github.com/onwidget/astrowind' }
+    { type: 'button', text: 'Download', href: 'https://github.com/onwidget/astrowind' },
+    { type: 'button', text: 'Upload', href: 'https://github.com/onwidget/astrowind' }
   ],
 };
   

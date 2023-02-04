@@ -1,24 +1,91 @@
 ---
 import Layout from '~/layouts/PageLayout.astro';
+import { Icon } from 'astro-icon';
+import { Picture } from '@astrojs/image/components';
 
-import { MetaSEO } from '~/types';
+import PostTags from '~/components/blog/Tags.astro';
+import SocialShare from '~/components/common/SocialShare.astro';
 
-export interface Props {}
+import { getPermalink } from '~/utils/permalinks';
+import { getFormattedDate } from '~/utils/utils';
 
-const { frontmatter } = Astro.props;
+import type { MetaSEO, Post } from '~/types';
+import ToBlogLink from '~/components/blog/ToBlogLink.astro';
+export interface Props {
+  meta: MetaSEO;
+  frontmatter: Post;
+  url: string | URL;
+}
 
-const meta: MetaSEO = {
-  title: frontmatter?.title,
-};
+const { meta, frontmatter, url } = Astro.props as Props;
 ---
 
 <Layout {meta}>
-  <section class="px-4 py-16 sm:px-6 mx-auto lg:px-8 lg:py-20 max-w-4xl">
-    <h1 class="font-bold font-heading text-4xl md:text-5xl leading-tighter tracking-tighter">{frontmatter.title}</h1>
-    <div
-      class="mx-auto prose prose-lg max-w-4xl dark:prose-invert dark:prose-headings:text-slate-300 prose-md prose-headings:font-heading prose-headings:leading-tighter prose-headings:tracking-tighter prose-headings:font-bold prose-a:text-blue-600 dark:prose-a:text-blue-400 prose-img:rounded-md prose-img:shadow-lg mt-8"
-    >
-      <slot />
-    </div>
+  <section class="py-8 sm:py-16 lg:py-20 mx-auto">
+    <article>
+      <header class={frontmatter.image ? '' : ''}>
+        <div class="flex justify-between flex-col sm:flex-row max-w-3xl mx-auto mt-0 mb-2 px-4 sm:px-6 sm:items-center">
+          <p>
+            <Icon name="tabler:clock" class="w-4 h-4 inline-block -mt-0.5 dark:text-gray-400" />
+            <time datetime={String(frontmatter.publishDate)}>{getFormattedDate(frontmatter.publishDate)}</time>
+            {
+              frontmatter.category && (
+                <>
+                  {' '}
+                  ·{' '}
+                  <a class="capitalize hover:underline" href={getPermalink(frontmatter.category, 'category')}>
+                    {frontmatter.category.replaceAll('-', ' ')}
+                  </a>
+                </>
+              )
+            }
+            {frontmatter.minutesRead && <> · {frontmatter.minutesRead} min read</>}
+          </p>
+        </div>
+        <h1
+          class="px-4 sm:px-6 max-w-3xl mx-auto text-4xl md:text-5xl font-bold leading-tighter tracking-tighter font-heading"
+        >
+          {frontmatter.title}
+        </h1>
+        <p
+          class="max-w-3xl mx-auto mt-4 mb-8 px-4 sm:px-6 text-xl md:text-2xl text-muted dark:text-slate-400 text-justify"
+        >
+          {frontmatter.excerpt}
+        </p>
+  
+        {
+          frontmatter.image ? (
+            <Picture
+              src={frontmatter.image}
+              class="max-w-full lg:max-w-6xl mx-auto mb-6 sm:rounded-md bg-gray-400 dark:bg-slate-700"
+              widths={[400, 900]}
+              sizes="(max-width: 900px) 400px, 900px"
+              alt={frontmatter.description || ''}
+              loading="eager"
+              aspectRatio={16 / 9}
+              width={900}
+              height={506}
+              loading="eager"
+              decoding="async"
+              background={undefined}
+            />
+          ) : (
+            <div class="max-w-3xl mx-auto px-4 sm:px-6">
+              <div class="border-t dark:border-slate-700" />
+            </div>
+          )
+        }
+      </header>
+      <div
+        class="mx-auto px-6 sm:px-6 max-w-3xl prose prose-lg lg:prose-xl dark:prose-invert dark:prose-headings:text-slate-300 prose-md prose-headings:font-heading prose-headings:leading-tighter prose-headings:tracking-tighter prose-headings:font-bold prose-a:text-primary dark:prose-a:text-blue-400 prose-img:rounded-md prose-img:shadow-lg mt-8"
+      >
+        <slot />
+      </div>
+      <div class="mx-auto px-6 sm:px-6 max-w-3xl mt-8 flex justify-between flex-col sm:flex-row">
+        <PostTags tags={frontmatter.tags} class="mr-5" />
+        <SocialShare url={url} text={frontmatter.title} class="mt-5 sm:mt-1 align-middle text-gray-500 dark:text-slate-600" />
+      </div>
+    </article>
   </section>
+  <ToBlogLink />
 </Layout>

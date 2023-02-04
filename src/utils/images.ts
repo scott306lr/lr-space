@@ -8,7 +8,8 @@ const load = async function () {
   return images;
 };
 
-let _images;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+let _images: any;
 
 /** */
 export const fetchLocalImages = async () => {

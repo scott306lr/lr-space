@@ -15,6 +15,7 @@ const post = defineCollection({
     category: z.string().optional(),
     tags: z.array(z.string()).optional(),
     author: z.string().optional(),
+    minutesRead: z.number().optional(),
   }),
 });
 

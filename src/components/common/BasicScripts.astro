@@ -11,6 +11,9 @@ import { SITE } from '~/config.mjs';
     }
   }
 
+  // if there is a default theme, apply it
+  // if there is no default theme, apply the system theme
+  // if there is no default theme and no system theme, apply the light theme
   if ((defaultTheme && defaultTheme.endsWith(':only')) || (!localStorage.theme && defaultTheme !== 'system')) {
     applyTheme(defaultTheme.replace(':only', ''));
   } else if (
@@ -22,6 +25,7 @@ import { SITE } from '~/config.mjs';
     applyTheme('light');
   }
 
+  // helper function to attach event listeners to multiple elements
   function attachEvent(selector, event, fn) {
     const matches = typeof selector === 'string' ? document.querySelectorAll(selector) : selector;
     if (matches && matches.length) {
@@ -35,6 +39,7 @@ import { SITE } from '~/config.mjs';
     let lastKnownScrollPosition = window.scrollY;
     let ticking = true;
 
+    // 
     attachEvent('[data-aw-toggle-menu]', 'click', function (_, elem) {
       elem.classList.toggle('expanded');
       document.body.classList.toggle('overflow-hidden');

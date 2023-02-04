@@ -1,3 +1,6 @@
+import { MarkdownHeading } from "astro";
+import { AstroComponentFactory } from "astro/dist/runtime/server";
+
 export interface Post {
   id: string;
   slug: string;
@@ -18,10 +21,15 @@ export interface Post {
   tags?: Array<string>;
   author?: string;
 
-  Content: unknown;
+  // Content: unknown;
   content?: string;
-
-  readingTime?: number;
+  minutesRead?: number;
+  render?: () => Promise<{
+    Content: AstroComponentFactory;
+    headings: MarkdownHeading[];
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    remarkPluginFrontmatter: Record<string, any>;
+  }>
 }
 
 export interface MetaSEO {

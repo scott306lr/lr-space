@@ -3,7 +3,7 @@ import type { CollectionEntry } from 'astro:content';
 import type { Post } from '~/types';
 import { cleanSlug, trimSlash, POST_PERMALINK_PATTERN } from './permalinks';
 
-const generatePermalink = async ({ id, slug, publishDate, category }) => {
+const generatePermalink = ({ id, slug, publishDate, category }) => {
   const year = String(publishDate.getFullYear()).padStart(4, '0');
   const month = String(publishDate.getMonth() + 1).padStart(2, '0');
   const day = String(publishDate.getDate()).padStart(2, '0');
@@ -28,9 +28,9 @@ const generatePermalink = async ({ id, slug, publishDate, category }) => {
     .join('/');
 };
 
-const getNormalizedPost = async (post: CollectionEntry<'post'>): Promise<Post> => {
-  const { id, slug: rawSlug = '', data } = post;
-  const { Content, remarkPluginFrontmatter } = await post.render();
+const getNormalizedPost = (post: CollectionEntry<'post'>): Post => {
+  const { id, slug: rawSlug = '', data, render } = post;
+  // const { Content, remarkPluginFrontmatter } = await post.render();
 
   const {
     tags: rawTags = [],
@@ -48,28 +48,29 @@ const getNormalizedPost = async (post: CollectionEntry<'post'>): Promise<Post> =
   return {
     id: id,
     slug: slug,
-
     publishDate: publishDate,
     category: category,
     tags: tags,
     author: author,
-
+    permalink: generatePermalink({ id, slug, publishDate, category }),
+    render: render,
     ...rest,
 
-    Content: Content,
-    // or 'body' in case you consume from API
+    // Content: Content,
+    // // or 'body' in case you consume from API
 
-    permalink: await generatePermalink({ id, slug, publishDate, category }),
+    
 
-    readingTime: remarkPluginFrontmatter?.readingTime,
+    // readingTime: remarkPluginFrontmatter?.readingTime,
   };
 };
 
 const load = async function (): Promise<Array<Post>> {
   const posts = await getCollection('post');
-  const normalizedPosts = posts.map(async (post) => await getNormalizedPost(post));
+  const normalizedPosts = posts.map((post) => getNormalizedPost(post));
+  // console.log('post1', await normalizedPosts[0].render())
 
-  const results = (await Promise.all(normalizedPosts))
+  const results = normalizedPosts
     .sort((a, b) => b.publishDate.valueOf() - a.publishDate.valueOf())
     .filter((post) => !post.draft);
 

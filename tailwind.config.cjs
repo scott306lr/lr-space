@@ -19,4 +19,9 @@ module.exports = {
   },
   plugins: [require('@tailwindcss/typography')],
   darkMode: 'class',
+
+  safelist: [
+    // for markdown autolink
+    'align-baseline', 'items-baseline', 'justify-end', 'flex-row-reverse', '-ml-8', 'w-8', 'h-6', 'opacity-0', 'group', 'group-hover:opacity-100'
+  ]
 };

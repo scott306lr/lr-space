@@ -59,3 +59,9 @@
 [data-aw-toggle-menu].expanded g > path:last-child {
   @apply rotate-45 translate-y-[-8px] translate-x-[14px];
 }
+
+@layer components {
+  *:is(h1, h2, h3, h4, h5, h6) {
+    @apply scroll-mt-24;
+  }
+}
