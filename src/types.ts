@@ -1,5 +1,5 @@
-import { MarkdownHeading } from "astro";
-import { AstroComponentFactory } from "astro/dist/runtime/server";
+import { MarkdownHeading } from 'astro';
+import { AstroComponentFactory } from 'astro/dist/runtime/server';
 
 export interface Post {
   id: string;
@@ -29,7 +29,7 @@ export interface Post {
     headings: MarkdownHeading[];
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     remarkPluginFrontmatter: Record<string, any>;
-  }>
+  }>;
 }
 
 export interface MetaSEO {

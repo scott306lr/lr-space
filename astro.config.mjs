@@ -23,7 +23,6 @@ import { autolinkConfig } from './plugins/rehype-autolink-config';
 // import { rehypeTasklistEnhancer } from './plugins/rehype-tasklist-enhancer';
 import { theme } from './syntax-highlighting-theme';
 
-
 import { SITE } from './src/config.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -40,16 +39,15 @@ export default defineConfig({
 
   integrations: [
     // AutoImport({
-		// 	imports: [asideAutoImport, codeSnippetAutoImport],
-		// }),
+    // 	imports: [asideAutoImport, codeSnippetAutoImport],
+    // }),
     tailwind({
       config: {
         applyBaseStyles: false,
-        
       },
     }),
     // astroAsides(),
-		// astroCodeSnippets(),
+    // astroCodeSnippets(),
     sitemap(),
     image({
       serviceEntryPoint: '@astrojs/image/sharp',
@@ -77,21 +75,21 @@ export default defineConfig({
 
   markdown: {
     // both aside and code-snippet plugins doesn't work correctly, reimplement with tailwind later?
-		syntaxHighlight: 'shiki',
-		shikiConfig: { theme },
-		remarkPlugins: [
-			// These are here because setting custom plugins disables the default plugins
-			remarkGFM,
-			[remarkSmartypants, { dashes: false }],
+    syntaxHighlight: 'shiki',
+    shikiConfig: { theme },
+    remarkPlugins: [
+      // These are here because setting custom plugins disables the default plugins
+      remarkGFM,
+      [remarkSmartypants, { dashes: false }],
       // This adds reading time to frontmatter
       readingTimeRemarkPlugin,
-		],
-		rehypePlugins: [
-			// This adds links to headings
+    ],
+    rehypePlugins: [
+      // This adds links to headings
       rehypeSlug,
-			[rehypeAutolinkHeadings, autolinkConfig],
-		],
-	},
+      [rehypeAutolinkHeadings, autolinkConfig],
+    ],
+  },
 
   vite: {
     resolve: {

@@ -22,6 +22,33 @@ module.exports = {
 
   safelist: [
     // for markdown autolink
-    'align-baseline', 'items-baseline', 'justify-end', 'flex-row-reverse', '-ml-8', 'w-8', 'h-6', 'opacity-0', 'group', 'group-hover:opacity-100'
-  ]
+    'align-baseline',
+    'items-baseline',
+    'justify-end',
+    'flex-row-reverse',
+    '-ml-8',
+    'w-8',
+    'h-6',
+    'opacity-0',
+    'group',
+    'group-hover:opacity-100',
+  ],
+  keyframes: {
+    'moving-line': {
+      from: {
+        width: '0px',
+        opacity: '0',
+      },
+      to: {
+        width: '30%',
+        opacity: '0.6',
+      },
+    },
+  },
+  animation: {
+    'moving-line': 'moving-line .8s ease .5s forwards',
+  },
+  variants: {
+    animation: ['motion-safe'],
+  },
 };

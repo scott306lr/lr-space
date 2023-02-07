@@ -1,13 +1,13 @@
 import defaultImage from './assets/images/default.png';
 
 const CONFIG = {
-  name: 'AstroWind',
+  name: 'lrSpace',
 
-  origin: 'https://astrowind.vercel.app',
+  origin: 'https://lrspace.me',
   basePathname: '/',
   trailingSlash: false,
 
-  title: 'AstroWind — Free template for create a website with Astro + Tailwind CSS',
+  title: 'lrSpace — Where I share my thoughts and ideas',
   description:
     '🚀 Suitable for Startups, Small Business, Sass Websites, Professional Portfolios, Marketing Websites, Landing Pages & Blogs.',
   defaultImage: defaultImage,

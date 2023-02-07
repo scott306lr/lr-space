@@ -59,8 +59,6 @@ const getNormalizedPost = (post: CollectionEntry<'post'>): Post => {
     // Content: Content,
     // // or 'body' in case you consume from API
 
-    
-
     // readingTime: remarkPluginFrontmatter?.readingTime,
   };
 };
