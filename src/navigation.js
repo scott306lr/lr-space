@@ -111,6 +111,47 @@ export const headerData = {
       ],
     },
     {
+      text: 'DV Homework',
+      links: [
+        {
+          text: 'HW 1',
+          href: getPermalink('/dv-hw/hw1/index.html'),
+        },
+        {
+          text: 'HW 2',
+          href: getPermalink('/dv-hw/hw2/index.html'),
+        },
+        {
+          text: 'HW 3',
+          href: getPermalink('/dv-hw/hw3/index.html'),
+        },
+        {
+          text: 'HW 4',
+          href: getPermalink('/dv-hw/hw4/index.html'),
+        },
+        {
+          text: 'HW 5',
+          href: getPermalink('/dv-hw/hw5/index.html'),
+        },
+        {
+          text: 'HW 6',
+          href: getPermalink('/dv-hw/hw6/index.html'),
+        },
+        {
+          text: 'HW 7',
+          href: getPermalink('/dv-hw/hw7/index.html'),
+        },
+        {
+          text: 'HW 8',
+          href: getPermalink('/dv-hw/hw8/'),
+        },
+        {
+          text: 'Spotify Trackalysis',
+          href: getPermalink('/dv-hw/spotify_trackalysis/index.astro'),
+        },
+      ],
+    },
+    {
       text: 'Widgets',
       href: '#',
     },
